@@ -6,7 +6,10 @@ module Lab1
      where
 
 
--- 1.insert 
+-- 1.insert
+
+insert :: Int -> Int -> [Int] -> [Int]
+insert n item iL
 
 
 -- 2. insertEvery
