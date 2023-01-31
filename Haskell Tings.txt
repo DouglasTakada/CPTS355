@@ -1,0 +1,23 @@
+1. go to file path
+2. Enter: ghc --make "filename"
+3.Enter: "ghci "filename.hs"
+Or "/.filename.exe"
+
+or
+
+1. ghci
+2. function name
+
+or
+
+1. ghci
+2. :l hello
+
+
+Declare a type with:
+y = :: 1 Int - low prescedence though so use parenthesis 
+
+Bindings:
+Uses the "=" sign to delcare bindings. Bindings are binding a value to a name.
+
+Bound names cannot start with upper case

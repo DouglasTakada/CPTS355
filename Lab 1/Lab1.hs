@@ -8,9 +8,12 @@ module Lab1
 
 -- 1.insert
 
-insert :: Int -> Int -> [Int] -> [Int]
+insert :: (Ord t1, Num t1) => t1 -> t2 -> [t2] -> [t2]
+insert t1 t2 [] = []
 insert n item iL
-
+     | t1 > length iL = error "index out of bounds"
+     | t1 == 0 = item : iL
+     | otherwise = newL ++ insert n-1 item iL
 
 -- 2. insertEvery
 
