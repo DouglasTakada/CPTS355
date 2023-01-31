@@ -8,12 +8,16 @@ module Lab1
 
 -- 1.insert
 
-insert :: (Ord t1, Num t1) => t1 -> t2 -> [t2] -> [t2]
-insert t1 t2 [] = []
-insert n item 
-     | t1 > length iL = error "index out of bounds"
-     | t1 == 0 = item : []
-     | otherwise = [] ++ insert n-1 item iL
+insert n item [] = []
+--insert :: (Num t1, Eq t1) => t1 -> t2 -> [t2] -> [t2]
+insert n item (x: xs)
+                    | n == 0 = item : (insert (n-1) item xs)
+                    | otherwise x : (insert (n-1) item xs)
+
+-- numbers2Sum [] n = []
+-- numbers2Sum  (x:xs) n | (n-x) < 0 = []
+--                       | otherwise = x: (numbers2Sum xs (n-x))
+
 
 -- 2. insertEvery
 
