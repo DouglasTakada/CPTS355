@@ -10,10 +10,10 @@ module Lab1
 
 insert :: (Ord t1, Num t1) => t1 -> t2 -> [t2] -> [t2]
 insert t1 t2 [] = []
-insert n item iL
+insert n item 
      | t1 > length iL = error "index out of bounds"
-     | t1 == 0 = item : iL
-     | otherwise = newL ++ insert n-1 item iL
+     | t1 == 0 = item : []
+     | otherwise = [] ++ insert n-1 item iL
 
 -- 2. insertEvery
 
