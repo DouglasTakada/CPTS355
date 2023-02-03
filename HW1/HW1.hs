@@ -1,17 +1,49 @@
 -- CptS 355 - Spring 2023 -- Homework1 - Haskell
--- Name:
+-- Name: Douglas Takada
 -- Collaborators: 
+
+
+{---Important Rules
+No use of importing libraries
+Generate atleast two test cases for each function
+idea for test cases: domain of input, maximum, minimum, inside/outside boundaries, typical values, error values
+With auxiliary functions, make them local functions (inside let..in or where block) LOSE POINTS if helper function not defined inside Local Scope 
+Proper indentation and good programming style for points
+-}
 
 module HW1
      where
 
 -- P1(a) count ;  6%
 
+count :: (Eq t1) => t1 -> [t1] -> Int
+count _ [] = 0
+count value (x:xs) | (value == x) = 1 + count value xs
+                   | otherwise = count value xs
 
 -- P1(b) diff ;  6%
 
+{-
+My approach: 
+If not equal I include otherwise don't include
+-}
 
+diff ::(Eq t1) => [t1] -> [t1] -> [t1]
+diff [] [] = []
+diff [] [_] = []
+diff xs [] = xs
+diff [x] (y:ys) | (count x (y:ys) == 0) = x:[]
+                | otherwise = []
+diff (x:xs) (y:ys) | ((count x (y:ys)) == 0) = x : diff xs (y:ys)
+                   | otherwise = diff xs (y:ys)
 -- P1(c) bag_diff ; 8%
+
+-- bag_diff :: (Eq t1, Num t1) => [t1] -> [t1] -> [t1]
+-- bag_diff [] [_] = []
+-- bag_diff xs [] = xs
+-- bag_diff [] [] = []
+-- bag_diff (x:xs) (y:ys) = bag_diff_helper (x:xs) (y:ys) diff((x:xs) (y:ys))
+--      where bag_diff_helper (x:xs) (y:ys) [z:zs] | ((count(x:xs) - count(x:(y:ys))) > 0)
 
 
 -- P2  everyN ; 10%

@@ -11,6 +11,12 @@ import HW1
 
 -- P1(a) count tests  
 
+p1a_test4 = TestCase (assertEqual "count-test4"
+                                 0
+                                 (count 0 []) )
+p1a_test5 = TestCase (assertEqual "count-test5"
+                                 0
+                                 (count 0 [1,2,3,4,5,6,7,8,9]) )
 
 -- P1(b) diff tests
 
