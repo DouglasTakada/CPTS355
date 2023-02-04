@@ -38,16 +38,32 @@ diff (x:xs) (y:ys) | ((count x (y:ys)) == 0) = x : diff xs (y:ys)
                    | otherwise = diff xs (y:ys)
 -- P1(c) bag_diff ; 8%
 
--- bag_diff :: (Eq t1, Num t1) => [t1] -> [t1] -> [t1]
--- bag_diff [] [_] = []
--- bag_diff xs [] = xs
--- bag_diff [] [] = []
+bag_diff :: Eq t1 => [t1] -> [t1] -> [t1]
+bag_diff [] [] = []
+bag_diff [] [_] = []
+bag_diff xs [] = xs
+bag_diff [x] l2 | ((count x l2) == 0) = x:[]
+                | otherwise = []
+bag_diff (x:xs) l2 | ((1 + count x xs) > count x l2) = x : bag_diff xs l2
+                   | otherwise = bag_diff xs l2
+
 -- bag_diff (x:xs) (y:ys) = bag_diff_helper (x:xs) (y:ys) diff((x:xs) (y:ys))
 --      where bag_diff_helper (x:xs) (y:ys) [z:zs] | ((count(x:xs) - count(x:(y:ys))) > 0)
 
 
 -- P2  everyN ; 10%
 
+everyN :: (Eq t1, Num t1) => [t2]-> t1 -> [t2]
+everyN iL n = everyNHelper iL n n
+     where 
+          everyNHelper [] y z = []
+          everyNHelper (x:xs) y z | (z == 0) = (x:xs)
+          everyNHelper (x:xs) y z | (y == 1) = x : everyNHelper xs z z
+                                  | otherwise = everyNHelper xs (y-1) z
+
+                    --               (k == 0) = item : (insertEveryHelper k item xs k)
+                    --  | (n == 1) = x :item : (insertEveryHelper k item xs k)
+                    --  |otherwise = x : (insertEveryHelper (n-1) item xs k)
 
 -- P3(a) make_sparse ; 15%
 
