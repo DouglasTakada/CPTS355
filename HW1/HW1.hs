@@ -24,9 +24,8 @@ count value (x:xs) | (value == x) = 1 + count value xs
 -- P1(b) diff ;  6%
 
 diff ::(Eq t1) => [t1] -> [t1] -> [t1]
-diff [] [] = []
-diff [] [_] = []
-diff xs [] = xs
+diff a b | (a == []) = []
+         | (b == []) = a
 diff [x] (y:ys) | (count x (y:ys) == 0) = x:[]
                 | otherwise = []
 diff (x:xs) (y:ys) | ((count x (y:ys)) == 0) = x : diff xs (y:ys)
@@ -34,15 +33,17 @@ diff (x:xs) (y:ys) | ((count x (y:ys)) == 0) = x : diff xs (y:ys)
 -- P1(c) bag_diff ; 8%
 
 bag_diff :: Eq t1 => [t1] -> [t1] -> [t1]
-bag_diff [] [] = []
-bag_diff [] [_] = []
-bag_diff xs [] = xs
+bag_diff a b | (a == []) = []
+             | (b == []) = a
 bag_diff [x] l2 | ((count x l2) == 0) = x:[]
                 | otherwise = []
 bag_diff (x:xs) l2 | ((1 + count x xs) > count x l2) = x : bag_diff xs l2
                    | otherwise = bag_diff xs l2
 
 -- P2  everyN ; 10%
+
+--The instructions didn't specify what should happen if given the input 0 with a list.
+--so I just made it so it will print out every element.
 
 everyN :: (Eq t1, Num t1) => [t2]-> t1 -> [t2]
 everyN iL n = everyNHelper iL n n
@@ -94,6 +95,7 @@ find_routes bus_stop ((x,(y:ys)):xs) | elem bus_stop (y:ys) = x : find_routes bu
 
 group_sum :: (Ord t1, Num t1) => [t1] -> t1 -> [[t1]]
 group_sum [] _ = []
+group_sum [_] 0 = []
 group_sum iL n = group_sum_helper iL [] n 0 0
      where
           group_sum_helper [] [] n k sum = []
