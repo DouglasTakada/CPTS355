@@ -10,32 +10,24 @@ module Lab2
 {- (a) merge2 -}
 
 merge2 :: [a] -> [a] -> [a]
-merge2 [] [] = []
 merge2 x [] = x
 merge2 [] x = x
-merge2 x y = merge2_helper x y 0
-     where
-          merge2_helper x [] _ = x
-          merge2_helper [] y _ = y
-          merge2_helper [x] (y:ys) counter | (counter == 0) = x : y : ys
-                                           | otherwise = y : merge2_helper x ys (counter - 1)
-          merge2_helper (x:xs) [y] counter | (counter == 0) = x : merge2_helper xs y (counter + 1)
-                                           | otherwise = y : x : xs
-          merge2_helper (x:xs) (y:ys) counter | (counter == 0) = x : merge2_helper xs (y:ys) (counter + 1)
-                                              | otherwise = y : merge2_helper (x:xs) ys (counter - 1)
-
-
-
-                         
+merge2 (x:xs) (y:ys) = x:y:merge2 xs ys
+                      
 
 {- (b) merge2Tail -}
 
-
-
+merge2Tail :: [a] -> [a] -> [a]
+merge2Tail x y = merge2TailHelper x y []
+     where
+          merge2TailHelper x [] acc = reverse(acc)
+          merge2TailHelper [] x  acc = reverse(acc)
+          merge2TailHelper (x:xs) (y:ys) acc = merge2TailHelper xs ys (y:x:acc)
 
 {- (c) mergeN -}
 
-
+mergeN:: [[a]] -> [a]
+mergeN xs = foldl merge2 [] xs
 
 
 -- 2
