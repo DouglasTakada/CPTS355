@@ -33,7 +33,9 @@ mergeN xs = foldl merge2 [] xs
 -- 2
 {- (a) count -}
 
-
+count :: Eq a => a -> [a] -> Int
+count _ [] = 0
+count num (x:xs) =  foldr (+) 1 
 
 
 {- (b) histogram  -}
