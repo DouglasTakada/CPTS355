@@ -9,12 +9,42 @@ module HW2
 
 -- (a) remove_every – 7%
 
+remove_every n []  = [] 
+remove_every n lst = remove_helper n lst n 
+  where
+     remove_helper 0 [x] k = []
+     remove_helper n [x] k = [x]
+
+     remove_helper 0 (x:xs) k = (remove_helper k xs k) 
+     remove_helper n (x:xs) k = x:(remove_helper (n-1) xs k)
+
+{-
+1. Both the recrusive calls to remove_helper was missing the last argument k
+2. The there were missing cases that did not write about when there is one element left
+     and what to do if the counter is either 0 or not zero
+-}
+
 -- (b) remove_every_tail –  10%
+
+remove_every_tail 0 _  = [] 
+remove_every_tail n lst = remove_every_tail_helper n lst n []
+  where
+     remove_every_tail_helper _ [] k acc = acc
+     remove_every_tail_helper 0 [x] k acc = acc
+     remove_every_tail_helper n [x] k acc = (remove_every_tail_helper (n-1) [] k (acc++[x]))
+
+     remove_every_tail_helper 0 (x:xs) k acc = (remove_every_tail_helper k xs k acc) 
+     remove_every_tail_helper n (x:xs) k acc = (remove_every_tail_helper (n-1) xs k (acc++[x]))
 
 ------------------------------------------------------
 {- P2  get_outof_range and count_outof_range  -}
 
 -- (a) get_outof_range – 6%
+
+get_outof_range v1 v2 (x:xs) = foldr (\value acc-> if value > v1 && value < v2 then value : acc else acc) [] (x:xs)
+
+--get_outof_range v1 v2 (x:xs) = foldr (\a acc -> if a > v1 && a < v2 then a : acc else acc) [] (x:xs)
+
 
 -- (b) count_outof_range – 10%
 
