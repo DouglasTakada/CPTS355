@@ -41,12 +41,11 @@ remove_every_tail n lst = remove_every_tail_helper n lst n []
 
 -- (a) get_outof_range – 6%
 
-get_outof_range v1 v2 (x:xs) = foldr (\value acc-> if value > v1 && value < v2 then value : acc else acc) [] (x:xs)
-
---get_outof_range v1 v2 (x:xs) = foldr (\a acc -> if a > v1 && a < v2 then a : acc else acc) [] (x:xs)
-
+get_outof_range v1 v2 xs = foldr (\value acc-> if value >= v1 && value <= v2 then acc else value : acc) [] xs
 
 -- (b) count_outof_range – 10%
+
+--count_outof_range v1 v2 (x:(y:ys)) = foldr(\value -> if value >= v1 && value <= v2 then acc else value : acc) [] (x:xs)
 
 ------------------------------------------------------
 {- P3  find_routes - 10% -}
