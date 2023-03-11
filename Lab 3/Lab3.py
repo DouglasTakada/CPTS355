@@ -49,7 +49,7 @@ def mostCases(data):
      monthy_cases = getMonthlyCases(data)
      return reduce(lambda t1, t2: t1 if t1[1] >= t2[1] else t2,
                    list(map(lambda t: (t[0],map_helper(t[1])),monthy_cases.items())))
-     
+
 
 ## problem 4a) searchDicts(L,k)
 L1 = [{"x":1,"y":True,"z":"found"},{"x":2},{"y":False}]
