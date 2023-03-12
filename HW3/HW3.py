@@ -85,15 +85,14 @@ def graph_cycle(graph, start):
 ## problem 4 - filter_iter – 15% 
 
 class filter_iter(object):
-     def __init__(self,op, n,it):
-          self.input1 = it
+     def __init__(self,op,it):
+          self.input = it
           self.op = op
-          self.n = n
           self.current = self._getNextInput()
 
      def _getNextInput(self):
           try:
-               current = self.input1.__next__()
+               current = self.input.__next__()
           except:
                current = None
           return current
@@ -102,7 +101,6 @@ class filter_iter(object):
           if self.current is None:
                raise StopIteration
           
-          temp_n = self.n
           total = self.current
           self.current = self._getNextInput()
           while (temp_n >1):
