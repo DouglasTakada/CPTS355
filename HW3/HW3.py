@@ -50,6 +50,11 @@ def merge_logs(lst):
 
      return new_dict
 
+log_list = [{'CptS355':{'Mon':3},'CptS360':{'Mon':3},'CptS321':{'Tue':2,},'CptS322':{'Tue':1}},
+             {'CptS322':{'Mon':2},'CptS360':{'Thu':2},'CptS321':{'Mon':1}},
+             {'CptS355':{'Mon':8},'CptS360':{'Sun':5},'CptS321':{'Sat':4},'CptS322':{'Sat':3}}]
+print(merge_logs(log_list))
+
 ## problem 2(a) - most_hours – 15%
 
 from functools import reduce
@@ -57,6 +62,10 @@ from functools import reduce
 def most_hours(data):
     temp = reduce(lambda x, y: x if sum(x[1].values()) > sum(y[1].values()) else y, data.items())
     return (temp[0],sum(temp[1].values()))
+
+input = {'class1': {}}
+
+print(most_hours(input))
 
 ## problem 2(b) - filter_log – 15%
 
@@ -68,7 +77,7 @@ def filter_log(data,day, hours):
 
 def graph_cycle(graph, start):
      def helper(graph, start,acc):
-          if graph.get(start)[0] is None:
+          if graph.get(start) is None:
                return None
           elif start not in new_list:
                acc.append(start)
@@ -80,40 +89,57 @@ def graph_cycle(graph, start):
      new_list = []
      temp = helper(graph, start,new_list)
      #Cutting out extra letters not in loop
-     return temp[temp.index(temp[-1],0,-1):]
+     if temp is None:
+          return None
+     else:
+          return temp[temp.index(temp[-1],0,-1):]
 
 ## problem 4 - filter_iter – 15% 
 
 class filter_iter(object):
-     def __init__(self,op,it):
-          self.input = it
+     def __init__(self,it,op):
+          self.input = iter(it)
           self.op = op
-          self.current = self._getNextInput()
-
-     def _getNextInput(self):
-          try:
-               current = self.input.__next__()
-          except:
-               current = None
-          return current
      
      def __next__(self):
-          if self.current is None:
+          if self.input is None:
                raise StopIteration
-          
-          total = self.current
-          self.current = self._getNextInput()
-          while (temp_n >1):
-
-               if self.current is not None:
-                    total = self.op(total, self.current)
-               else:
-                    break
-               self.current = self._getNextInput()
-               temp_n -= 1
-          return total
+          temp = next(self.input)
+          while not self.op(temp):
+               temp = next(self.input)
+          return temp
      def __iter__(self):
           return self
 
-
 ## problem 5 - merge – 10% 
+
+def merge(it1, it2, n):
+     newList = []
+     temp1 = next(it1, None)
+     temp2 = next(it2,None)
+     if temp1 == None:
+          return newList
+     if temp2 == None:
+          return newList
+     for x in range(0,n):
+          if temp1 <= temp2:
+               newList.append(temp1)
+               temp1 = next(it1,None)
+               if temp1 is None:
+                    break
+          else:
+               newList.append(temp2)
+               temp2 = next(it2,None)
+               if temp2 is None:
+                    break
+     return newList
+
+class Numbers():
+    def __init__(self,init):
+        self.current = init
+    def __next__(self):
+        result = self.current
+        self.current += 1
+        return result
+    def __iter__(self):
+        return self
